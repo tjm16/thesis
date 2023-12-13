@@ -129,39 +129,20 @@ m_P = 0.124 # molar mass of basalt [kg/mol]
 t,N,P,Bg,Wg,tCflux = run_model(N0=N0,V=V,n=n,A0=A0,KCO2=KCO2,tau=tau,n_LIP=n_LIP,
                 Ar=Ar*10**6,h=h,rho=rho,chi_m=chi_m,m_P=m_P,P0=P0,k=k,m=m)
 
-# plot results
-fig,ax = plt.subplots()
-ax.set_xlabel('time [Myr]')
-ax.set_ylabel('N [examol]')
-ax.set_title('Initial Model Results')
-ax.plot(t,N,label="Surficial Carbon")
-
-
-fig,ax = plt.subplots()
-ax.set_xlabel('time [Myr]')
-ax.set_ylabel('per mille')
-ax.set_title('delta 13 C "proxy"')
-ax.plot(t,Bg/Wg,label="delta 13 C proxy")
-#plt.show()
-
-fig,ax = plt.subplots()
-ax.set_xlabel('time [Myr]')
-ax.set_ylabel('C Flux [Emol/Myr]')
-ax.set_title('Total Carbon ROC')
-ax.plot(t,tCflux,label="total carbon flux")
-#plt.show()
-
-fig, axs = plt.subplots(4, 1, figsize=(8, 4 * 4))
+fig, axs = plt.subplots(2, 2, figsize=(12, 12))
 
 axs[0].plot(t,N)
 axs[0].set_title("Initial Model Results")
 axs[0].set_xlabel("time [Myr]")
 axs[0].set_ylabel("N [examol]")
 
-axs[1].plot(t,tCflux)
+axs[1].plot(t,tCflux,label="total flux")
+axs[1].plot(t,Wg, label="inorganic burial flux")
+axs[1].plot(t,Bg,label="organic burial flux")
 axs[1].set_title("Total Carbon Flux")
 axs[1].set_xlabel("time [Myr]")
 axs[1].set_ylabel("dN/dt [examol/Myr]")
+axs[1].legend(loc="best")
 
 axs[2].plot(t,Bg/Wg)
 axs[2].set_title("delta 13 C 'proxy'")
