@@ -110,12 +110,12 @@ tau = 5 # LIP decay time scale [Myr]
 n_LIP = 0.5 # LIP-specific silicate weathering feedback strength
 
 # interface for app
-st.title("Thesis Progress Repoort Results")
+st.title("Modeling Results for Progress Report")
 
 # new variables
 
 P0 = st.slider("P_0 [examol]", min_value=0.0000, max_value=0.0050, value=0.0020)
-Ar = st.slider("A [m^2]", min_value=2.0*10**6, max_value=5.0*10**6, value=4.0*10**6)
+Ar = st.slider("A [m^2]", min_value=2.0, max_value=5.0, value=4.0)
 h = st.slider("h [m/yr]", min_value=0.0010, max_value=0.0030, value=0.0010)
 k = st.slider("k [Emol/Myr]", min_value=1.00, max_value=4.00, value=3.75)
 m = st.slider("m [dimensionless]", min_value=1.00, max_value=3.00, value=2.00)
@@ -127,7 +127,7 @@ m_P = 0.124 # molar mass of basalt [kg/mol]
 
 # run model
 t,N,P,Bg,Wg,tCflux = run_model(N0=N0,V=V,n=n,A0=A0,KCO2=KCO2,tau=tau,n_LIP=n_LIP,
-                Ar=Ar,h=h,rho=rho,chi_m=chi_m,m_P=m_P,P0=P0,k=k,m=m)
+                Ar=Ar*10**6,h=h,rho=rho,chi_m=chi_m,m_P=m_P,P0=P0,k=k,m=m)
 
 # plot results
 fig,ax = plt.subplots()
@@ -153,25 +153,25 @@ ax.plot(t,tCflux,label="total carbon flux")
 
 fig, axs = plt.subplots(4, 1, figsize=(8, 4 * 4))
 
-axs[1].plot(t,N)
-axs[1].set_title("Initial Model Results")
+axs[0].plot(t,N)
+axs[0].set_title("Initial Model Results")
+axs[0].set_xlabel("time [Myr]")
+axs[0].set_ylabel("N [examol]")
+
+axs[1].plot(t,tCflux)
+axs[1].set_title("Total Carbon Flux")
 axs[1].set_xlabel("time [Myr]")
-axs[1].set_ylabel("N [examol]")
+axs[1].set_ylabel("dN/dt [examol/Myr]")
 
-axs[2].plot(t,tCflux)
-axs[2].set_title("Total Carbon Flux")
+axs[2].plot(t,Bg/Wg)
+axs[2].set_title("delta 13 C 'proxy'")
 axs[2].set_xlabel("time [Myr]")
-axs[2].set_ylabel("dN/dt [examol/Myr]")
+axs[2].set_ylabel("Organic/Inorganic BR")
 
-axs[3].plot(t,Bg/Wg)
-axs[3].set_title("delta 13 C 'proxy'")
+axs[3].plot(t,P)
+axs[3].set_title("Oceanic Phosphorus")
 axs[3].set_xlabel("time [Myr]")
-axs[3].set_ylabel("Organic/Inorganic BR")
-
-axs[4].plot(t,P)
-axs[4].set_title("Oceanic Phosphorus")
-axs[4].set_xlabel("time [Myr]")
-axs[4].set_ylabel("P [examol]")
+axs[3].set_ylabel("P [examol]")
 
 plt.tight_layout()
 st.pyplot(fig)
