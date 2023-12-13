@@ -129,7 +129,7 @@ m_P = 0.124 # molar mass of basalt [kg/mol]
 t,N,P,Bg,Wg,tCflux = run_model(N0=N0,V=V,n=n,A0=A0,KCO2=KCO2,tau=tau,n_LIP=n_LIP,
                 Ar=Ar*10**6,h=h,rho=rho,chi_m=chi_m,m_P=m_P,P0=P0,k=k,m=m)
 
-fig, axs = plt.subplots(2, 2, figsize=(12, 12))
+fig, axs = plt.subplots(4, 1, figsize=(8, 20))
 
 axs[0].plot(t,N)
 axs[0].set_title("Initial Model Results")
