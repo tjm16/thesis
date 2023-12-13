@@ -114,9 +114,9 @@ st.title("Modeling Results for Progress Report")
 
 # new variables
 
-P0 = st.slider("P_0 [examol]", min_value=0.001, max_value=0.01, value=0.002)
+P0 = st.slider("P_0 [examol]", min_value=0.001, max_value=0.01, value=0.002, step=0.001)
 Ar = st.slider("A [m^2]", min_value=2.0, max_value=5.0, value=4.0)
-h = st.slider("h [m/yr]", min_value=0.001, max_value=0.01, value=0.005)
+h = st.slider("h [m/yr]", min_value=0.001, max_value=0.01, value=0.005, step=0.001)
 k = st.slider("k [Emol/Myr]", min_value=1.00, max_value=4.00, value=3.75)
 m = st.slider("m [dimensionless]", min_value=1.00, max_value=3.00, value=2.00)
 
